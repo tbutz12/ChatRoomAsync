@@ -1,0 +1,36 @@
+<h1>Create an Event!</h1>
+<br>
+<a href='{{url_for("login")}}'>Click here to return to login!</a>
+{% extends "base.html" %}
+
+{% block title %}Event Page! - {{ super() }}{% endblock %}
+
+{% block body %}
+	<ul>
+		<form action="" method="post">
+			Event Name:  <input type="text" name="name" />
+			<br />
+			Event Description:  <input type="text" name="des" />
+			<br />
+			Event Start Time:  <input type="text" name="stime" placeholder = "00/00/0000 00:00" />
+			<br />
+			Event End Time:  <input type="text" name="etime" />
+			<br />
+			<input type="submit" value="submit" />
+		</form>
+	</ul>
+	<h3>List of Events:</h3>
+<ul>
+	{% for e in list %}
+	<div style="font-size:18px">
+		<li>Event Host: {{e.eventHost}}</li>
+		<li>Event Name: {{ e.eventName }}</li>
+		<li>Event Description: {{ e.eventDescription }}</li>
+		<li>Event Start Time: {{ e.eventStartTime }}</li>
+		<li>Event End Time: {{ e.eventEndTime }}</li>
+	</div>
+	<br>
+	<br>
+		{% endfor %}
+</ul>
+{% endblock %}

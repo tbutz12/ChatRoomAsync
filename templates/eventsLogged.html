@@ -1,0 +1,61 @@
+<h1>Events Homepage!</h1>
+<br>
+<h3>List of Events:</h3>
+<ul>
+    {% if check == "true" %}
+    {{url_for("homepage", username = username)}}
+    {% endif %}
+	{% for e in list %}
+	<div>
+		<li>Event Host: {{e.eventHost}}</li>
+		<li>Event Name: {{ e.eventName }}</li>
+		<li>Event Description: {{ e.eventDescription }}</li>
+		<li>Event Start Time: {{ e.eventStartTime }}</li>
+        <li>Event End Time: {{ e.eventEndTime }}</li>
+        {% if username != e.eventHost %}
+            <form action = "" method ="post">
+                <input type = "hidden" name = "eventName" value = "{{e.eventName}}">
+                <button name = "{{e.eventName}}" style="background-color:black;color:white;width:150px;
+                height:40px;" >Register for {{e.eventName}}</button>
+            </form>
+        {% else %}
+        <form action = "" method ="post">
+            <input type = "hidden" name = "eventName" value = "delete{{e.eventName}}">
+            <button name = "{{e.eventName}}" style="background-color:red;color:white;width:150px;
+            height:40px;" onclick="return confirm('Are you sure you want to delete this event?')">Delete {{e.eventName}}</button>
+        </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <h3>Events you are signed up for:</h3>
+            {% for b in junction %}
+                {% if user == b.user_id%}
+                    {% for e in list %}
+                        {% if e.id == b.event_id %} 
+                            <div>
+                            <li>Event Host: {{e.eventHost}}</li>
+                            <li>Event Name: {{ e.eventName }}</li>
+                            <li>Event Description: {{ e.eventDescription }}</li>
+                            <li>Event Start Time: {{ e.eventStartTime }}</li>
+                            <li>Event End Time: {{ e.eventEndTime }}</li>
+                            </div>
+                            <br>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+    </div>
+</ul>
+
+<br>
+<a href='{{url_for("event")}}' >Click here to return create an event!</a><br><br>
+{% extends "base.html" %}
+
+{% block title %}Homepage! - {{ super() }}{% endblock %}
+
+{% block body %}
+{% endblock %}

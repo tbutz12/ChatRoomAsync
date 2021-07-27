@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+<h1>{{name}} Chat Room!</h1>
+<p id = "forumName" style="display: none;">{{name}}</p>
+<br>
+<a href='{{url_for("logout")}}'>Click here to return to return to login!</a>
+<br>
+{% extends "base.html" %}
+{% block title %}View Chat! - {{ super() }}{% endblock %}
+{% block body %}
+    <table id="table1">
+        {% for i in items %}
+            <tr>
+                <td>{{ i }}</td>
+            </tr>
+        {% else %}
+        {% endfor %}
+    </table>
+    <h3> Add new reply: </h3>
+    <form name="form">
+        <input type="text" id="message" name = "message" value="" />
+        <input type="button" id="button1" value="submit!" />
+    </form>
+    <br>
+    <form action ='{{url_for("leaveChat")}}'>
+        <button type = "submit">Leave Chat!</button>
+    </form>
+    <br>
+{% endblock %}
+</html>

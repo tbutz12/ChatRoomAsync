@@ -1,0 +1,54 @@
+<h1>Chat Room Homepage!</h1>
+<br>
+<h3>List of Chat Rooms:</h3>
+<ul>
+	{% if flag %}
+	<script>
+		alert("You are already in a chat room!");
+	</script>
+	{% endif %}
+	{% if flag2 %}
+	<script>
+		alert("No chat rooms currently exist!");
+	</script>
+	{% endif %}
+	{% if list|length or not deleted%}
+		{% for e in list %}
+		<div style="font-size:18px">
+				<p>{{length}}</p>
+				<br>
+					<li>Chat Room: {{e}}
+					<br>
+					Chat Room Host: {{list[e]}}
+					<form action = "{{ url_for('viewChatRoom', name = e) }}" method="POST">
+						<button type="submit" name = "chat" value="chatView">Join</button>
+					</form>
+					{% if list[e] == name %}
+					<form action ="{{ url_for('deleteChat', chatName = e) }}" method="POST">
+						<button type = "submit" id = "button2">Delete Chat!</button>
+					</form>
+					{% endif %}
+				</li>
+			<br>
+		</div>
+		<br>
+		<br>
+		{% endfor %}
+	{% else %}
+		<script>
+			alert("There are no chat rooms!");
+		</script>
+		<p>Empty!</p>
+	{% endif %}
+</ul>
+<a href='{{url_for("createChatRoom")}}'>Click here to create a chat room!</a>
+<br>
+<br>
+<a href='{{url_for("logout")}}'>Click here to return to return to login!</a>
+<br>
+{% extends "base.html" %}
+
+{% block title %}Homepage! - {{ super() }}{% endblock %}
+
+{% block body %}
+{% endblock %}
